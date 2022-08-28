@@ -1,3 +1,10 @@
+import styled from 'styled-components';
+
+const H1 = styled.h1`
+  color: ${({ color }) => color};
+  text-align: center;
+`;
+
 export default function Home() {
-  return <h1>Welcome to UIX Web Platform</h1>;
+  return <H1 color="teal">Welcome to UIX Web Platform</H1>;
 }
