@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Color } from 'uikit';
 
 const H1 = styled.h1`
   color: ${({ color }) => color};
@@ -6,5 +7,5 @@ const H1 = styled.h1`
 `;
 
 export default function Home() {
-  return <H1 color="teal">Welcome to UIX Web Platform</H1>;
+  return <H1 color={Color.black}>Welcome to UIX Web Platform</H1>;
 }
