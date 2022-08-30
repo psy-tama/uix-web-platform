@@ -4,9 +4,9 @@ UIX Web Platform
 
 ## Run Project
 
-`npm install` to install dependencies
+`yarn` to install dependencies
 
-`npm run dev` to run the server.
+`yarn dev` to run the server.
 
 By default it exposes port 3000, open browser and goto `http://localhost:3000`
 
