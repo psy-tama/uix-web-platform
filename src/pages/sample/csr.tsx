@@ -5,8 +5,14 @@ type Item = {
   title: string;
 };
 
+interface Results {
+  results: Array<Item>;
+}
+
 const Home = () => {
-  const { data, error } = useFetch({ url: 'https://swapi.dev/api/films/' });
+  const { data, error } = useFetch<Results>({
+    url: 'https://swapi.dev/api/films/'
+  });
 
   if (error) return null;
 

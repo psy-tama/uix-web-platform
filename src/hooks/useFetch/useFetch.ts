@@ -1,37 +1,40 @@
-import useSWR from 'swr';
+import useSWR, { Key, Fetcher, SWRResponse } from 'swr';
 import { sanitizeOptions } from './helper';
 
-const fetcher = async (url: string, options?: any) => {
-  const res = await fetch(url, options);
-
-  // If the status code is not in the range 200-299,
-  // we still try to parse and throw it.
-  if (!res.ok) {
-    const error = new Error('Failed to fetch', { cause: res });
-    throw error;
-  }
-
-  return res.json();
-};
-
-type FetchArgTypes = {
+interface FetchArgTypes {
   url: string;
-  options?: any;
-  configOverride?: any;
+  options?: RequestInit;
+  configOverride?: RequestInit;
   enabled?: boolean;
-};
+}
 
-const useFetch = ({
+const useFetch = <T>({
   url,
   options,
   configOverride = {},
   enabled = true
-}: FetchArgTypes) => {
+}: FetchArgTypes): SWRResponse<T, Error> => {
+  const fetcher: Fetcher<T, Key> = async (
+    url: string,
+    options?: RequestInit
+  ): Promise<T> => {
+    const res = await fetch(url, options);
+
+    // If the status code is not in the range 200-299,
+    // we still try to parse and throw it.
+    if (!res.ok) {
+      const error: Error = new Error('Failed to fetch');
+      throw error;
+    }
+
+    return res.json();
+  };
+
   const config = {
     shouldRetryOnError: false
   };
   const sanitizedOptions = sanitizeOptions(options);
-  const { data, error } = useSWR(
+  return useSWR<T, Error>(
     () => (enabled ? [url, sanitizedOptions] : null),
     fetcher,
     {
@@ -39,8 +42,6 @@ const useFetch = ({
       ...configOverride
     }
   );
-
-  return { data, error };
 };
 
 export default useFetch;
