@@ -1,5 +1,5 @@
 import { useFetch } from 'hooks';
-import React from 'react';
+import Link from 'next/link';
 
 type Item = {
   title: string;
@@ -26,6 +26,7 @@ const Home = () => {
           <li key={item.title}>{item.title}</li>
         ))}
       </ul>
+      <Link href="/sample/ssr">SSR</Link>
     </main>
   );
 };

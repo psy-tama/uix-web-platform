@@ -1,3 +1,4 @@
+import Link from 'next/link';
 type Item = {
   title: string;
 };
@@ -15,6 +16,7 @@ const Home = ({ data }: Data) => {
           <li key={item.title}>{item.title}</li>
         ))}
       </ul>
+      <Link href="/sample/csr">CSR</Link>
     </main>
   );
 };
