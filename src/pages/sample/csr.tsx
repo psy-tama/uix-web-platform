@@ -1,28 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import { useFetch } from 'hooks';
+import Link from 'next/link';
 
 type Item = {
   title: string;
 };
 
+interface Results {
+  results: Array<Item>;
+}
+
 const Home = () => {
-  const [data, setData] = useState<Array<Item>>([]);
-  useEffect(() => {
-    const getData = async () => {
-      const response = await fetch('https://swapi.dev/api/films/');
-      const data = await response.json();
-      setData(data.results);
-    };
-    getData();
-  }, []);
+  const { data, error } = useFetch<Results>({
+    url: 'https://swapi.dev/api/films/'
+  });
+
+  if (error) return null;
+
+  const results = data?.results;
 
   return (
     <main>
       <h1>The Starwars films</h1>
       <ul>
-        {data.map((item: Item) => (
+        {(results || []).map((item: Item) => (
           <li key={item.title}>{item.title}</li>
         ))}
       </ul>
+      <Link href="/sample/ssr">SSR</Link>
     </main>
   );
 };

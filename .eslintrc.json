@@ -1,9 +1,9 @@
 {
   "extends": ["next/core-web-vitals", "prettier"],
-  "plugins": ["no-relative-import-paths"],
+  "plugins": ["no-relative-import-paths", "@typescript-eslint"],
   "rules": {
     "no-console": "error",
-    "no-unused-vars": "error",
+    "@typescript-eslint/no-unused-vars": "error",
     "no-relative-import-paths/no-relative-import-paths": [
       "error",
       { "allowSameFolder": true }
