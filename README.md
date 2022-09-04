@@ -12,4 +12,6 @@ By default it exposes port 3000, open browser and goto `http://localhost:3000`
 
 ### Links
 
-- Read how to use use different data fetching and rendering based on your project - [CSR, SSR and SSG](docs/csr-ssr-ssg.md)
+- [CSR, SSR and SSG](docs/csr-ssr-ssg.md) - Read how to use use different data fetching and rendering based on your project
+- [Storybook](docs/storybook.md) - How to use storybook and develop new core components
+- [Data Fetching](docs/data-fetching.md) - How to fetch an API in both Client and Server side
